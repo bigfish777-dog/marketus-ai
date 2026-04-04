@@ -185,21 +185,15 @@
         <div class="fit-indicators">
           <div class="fit-item">
             <div class="fit-icon"></div>
-            <span class="fit-text"
-              >People across the team using AI differently, with no shared approach</span
-            >
+            <span class="fit-text">People across the team using AI differently, with no shared approach</span>
           </div>
           <div class="fit-item">
             <div class="fit-icon"></div>
-            <span class="fit-text"
-              >A growing sense that competitors are moving faster</span
-            >
+            <span class="fit-text">A growing sense that competitors are moving faster</span>
           </div>
           <div class="fit-item">
             <div class="fit-icon"></div>
-            <span class="fit-text"
-              >Money going into tools and platforms without a clear return</span
-            >
+            <span class="fit-text">Money going into tools and platforms without a clear return</span>
           </div>
           <div class="fit-item">
             <div class="fit-icon"></div>
@@ -248,87 +242,193 @@
           </p>
         </div>
 
-        <form class="book-form" action="mailto:hello@marketus-ai.co.uk" method="post" enctype="text/plain">
-          <div class="form-group">
-            <label class="form-label" for="name">Your name</label>
-            <input id="name" name="name" type="text" class="form-input" placeholder="Full name" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="agency">Agency name</label>
-            <input id="agency" name="agency" type="text" class="form-input" placeholder="Your agency" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input id="email" name="email" type="email" class="form-input" placeholder="you@agency.com" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="agency-size">How many people in your agency?</label>
-            <select id="agency-size" name="agency_size" class="form-select">
-              <option value="" disabled selected>Select</option>
-              <option>Under 8</option>
-              <option>8–15</option>
-              <option>16–25</option>
-              <option>26–40</option>
-              <option>40+</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">
-              What best describes your biggest challenge with AI right now?
-            </label>
-            <div class="radio-group">
-              <label class="radio-option">
-                <input type="radio" name="challenge" value="fragmented" />
-                <span class="radio-custom"></span>
-                <span class="radio-label">Different people using different tools — nothing's connected</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="challenge" value="inconsistent" />
-                <span class="radio-custom"></span>
-                <span class="radio-label">Inconsistent results — some people get value, others don't</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="challenge" value="no-strategy" />
-                <span class="radio-custom"></span>
-                <span class="radio-label">No clear strategy — lots of experimenting, no plan</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="challenge" value="behind" />
-                <span class="radio-custom"></span>
-                <span class="radio-label">Feeling like we're falling behind other agencies</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="challenge" value="roi" />
-                <span class="radio-custom"></span>
-                <span class="radio-label">Spending on AI tools but not seeing the return</span>
-              </label>
-              <label class="radio-option">
-                <input type="radio" name="challenge" value="other" />
-                <span class="radio-custom"></span>
-                <span class="radio-label">Something else</span>
-              </label>
+        <form class="book-form multi-step-form" id="audit-form">
+          <div class="form-progress" aria-label="Audit progress">
+            <div class="progress-step is-active" data-step="1">
+              <span class="progress-index">01</span>
+              <span class="progress-text">The basics</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+              <span class="progress-index">02</span>
+              <span class="progress-text">More context</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+              <span class="progress-index">03</span>
+              <span class="progress-text">Sense check</span>
             </div>
           </div>
 
-          <div class="form-group">
-            <label class="form-label" for="context">
-              Anything else you'd like us to know?
-              <span class="form-label-sub">Optional — but helpful context never hurts.</span>
-            </label>
-            <textarea
-              id="context"
-              name="context"
-              class="form-textarea"
-              placeholder="E.g. what you've tried so far, what's working, what isn't..."
-            ></textarea>
+          <div class="form-panel is-active" data-panel="1">
+            <div class="form-panel-intro">
+              <h3>Step 1 — Tell us about your agency</h3>
+              <p>Just enough for a first read. This should take about a minute.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="first-name">First name</label>
+              <input id="first-name" name="first_name" type="text" class="form-input" placeholder="First name" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Work email</label>
+              <input id="email" name="email" type="email" class="form-input" placeholder="you@agency.com" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="website">Company website</label>
+              <input id="website" name="website" type="url" class="form-input" placeholder="https://youragency.com" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="agency-size">Agency headcount</label>
+              <select id="agency-size" name="agency_size" class="form-select" required>
+                <option value="" disabled selected>Select</option>
+                <option>Under 8</option>
+                <option>8–15</option>
+                <option>16–25</option>
+                <option>26–40</option>
+                <option>40+</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Biggest challenge with AI right now</label>
+              <div class="radio-group">
+                <label class="radio-option">
+                  <input type="radio" name="challenge" value="Different people using different tools — nothing's connected" required />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">Different people using different tools — nothing's connected</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="challenge" value="Inconsistent results — some people get value, others don't" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">Inconsistent results — some people get value, others don't</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="challenge" value="No clear strategy — lots of experimenting, no plan" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">No clear strategy — lots of experimenting, no plan</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="challenge" value="Feeling like we're falling behind other agencies" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">Feeling like we're falling behind other agencies</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="challenge" value="Spending on AI tools but not seeing the return" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">Spending on AI tools but not seeing the return</span>
+                </label>
+                <label class="radio-option">
+                  <input type="radio" name="challenge" value="Something else" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">Something else</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <button type="button" class="form-submit form-submit--inline" data-next="2">Continue</button>
+            </div>
           </div>
 
-          <button class="form-submit" type="submit">Request your audit</button>
-          <p class="form-note">We’ll be in touch within 24 hours.</p>
+          <div class="form-panel" data-panel="2">
+            <div class="form-panel-intro">
+              <h3>Step 2 — A bit more context</h3>
+              <p>While you fill this in, we’ll start building a first-pass summary in the background.</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="ai-setup">Which best describes your current AI setup?</label>
+              <select id="ai-setup" name="ai_setup" class="form-select">
+                <option value="" disabled selected>Select</option>
+                <option>Mostly individual experimentation</option>
+                <option>A few promising workflows, but nothing joined up</option>
+                <option>Some embedded systems, but still patchy</option>
+                <option>Fairly mature, but we know there’s more to unlock</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="biggest-opportunity">Where do you think the biggest opportunity is?</label>
+              <select id="biggest-opportunity" name="biggest_opportunity" class="form-select">
+                <option value="" disabled selected>Select</option>
+                <option>Internal efficiency</option>
+                <option>Delivery speed and quality</option>
+                <option>Sales and proposals</option>
+                <option>Reporting and operations</option>
+                <option>A bit of everything</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="tools">What AI tools are you already using?</label>
+              <input id="tools" name="tools" type="text" class="form-input" placeholder="E.g. ChatGPT, Claude, Gemini, Notion AI, Zapier..." />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="context">
+                Anything else we should know?
+                <span class="form-label-sub">Optional — but useful if there’s context behind the challenge.</span>
+              </label>
+              <textarea id="context" name="context" class="form-textarea" placeholder="What you've tried, what feels messy, where the frustration is, or what you're hoping AI will unlock..."></textarea>
+            </div>
+
+            <div class="form-actions form-actions--split">
+              <button type="button" class="form-secondary" data-back="1">Back</button>
+              <button type="button" class="form-submit form-submit--inline" data-next="3">See the summary</button>
+            </div>
+          </div>
+
+          <div class="form-panel" data-panel="3">
+            <div class="form-panel-intro">
+              <h3>Step 3 — Is this a fair summary?</h3>
+              <p>Based on what you’ve shared, here’s our first read. Tweak it if we’ve missed the mark.</p>
+            </div>
+
+            <div class="summary-card" id="summary-card">
+              <div class="summary-loading" id="summary-loading">
+                <div class="summary-pulse"></div>
+                <div class="summary-pulse summary-pulse--short"></div>
+                <div class="summary-pulse"></div>
+              </div>
+              <div class="summary-content" id="summary-content" hidden>
+                <p id="summary-text"></p>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Is that about right?</label>
+              <div class="radio-group radio-group--inline">
+                <label class="radio-option radio-option--compact">
+                  <input type="radio" name="summary_fit" value="Yes, that feels right" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">Yes, that feels right</span>
+                </label>
+                <label class="radio-option radio-option--compact">
+                  <input type="radio" name="summary_fit" value="Not quite" />
+                  <span class="radio-custom"></span>
+                  <span class="radio-label">Not quite</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="summary-notes">
+                Add anything we’ve missed
+                <span class="form-label-sub">Optional — useful if the summary is close, but not quite there.</span>
+              </label>
+              <textarea id="summary-notes" name="summary_notes" class="form-textarea" placeholder="Anything we should add, sharpen or correct?"></textarea>
+            </div>
+
+            <div class="form-actions form-actions--split">
+              <button type="button" class="form-secondary" data-back="2">Back</button>
+              <button class="form-submit form-submit--inline" type="submit">Request your audit</button>
+            </div>
+            <p class="form-note">We’ll be in touch within 24 hours.</p>
+          </div>
         </form>
       </div>
     </section>
@@ -338,9 +438,7 @@
         <span class="footer-text">© 2026 Marketus.ai</span>
         <span class="footer-ttm"
           >A service by
-          <a href="https://testyourmarketing.com" target="_blank" rel="noreferrer"
-            >Test Tube Marketing</a
-          ></span
+          <a href="https://testyourmarketing.com" target="_blank" rel="noreferrer">Test Tube Marketing</a></span
         >
       </div>
     </footer>
@@ -356,6 +454,96 @@
         { threshold: 0.12 }
       );
       reveals.forEach((el) => observer.observe(el));
+
+      const form = document.getElementById('audit-form');
+      const panels = Array.from(form.querySelectorAll('.form-panel'));
+      const progressSteps = Array.from(form.querySelectorAll('.progress-step'));
+      const summaryLoading = document.getElementById('summary-loading');
+      const summaryContent = document.getElementById('summary-content');
+      const summaryText = document.getElementById('summary-text');
+      let currentStep = 1;
+      let summaryTimer;
+
+      function showStep(step) {
+        currentStep = step;
+        panels.forEach((panel) => {
+          panel.classList.toggle('is-active', Number(panel.dataset.panel) === step);
+        });
+        progressSteps.forEach((item) => {
+          const itemStep = Number(item.dataset.step);
+          item.classList.toggle('is-active', itemStep === step);
+          item.classList.toggle('is-complete', itemStep < step);
+        });
+      }
+
+      function validateStep(step) {
+        const panel = form.querySelector(`.form-panel[data-panel="${step}"]`);
+        const fields = Array.from(panel.querySelectorAll('input, select, textarea'));
+        for (const field of fields) {
+          if (!field.checkValidity()) {
+            field.reportValidity();
+            return false;
+          }
+        }
+        return true;
+      }
+
+      function getValue(name) {
+        const field = form.elements[name];
+        if (!field) return '';
+        if (field instanceof RadioNodeList) return field.value || '';
+        return field.value || '';
+      }
+
+      function generateSummary() {
+        const firstName = getValue('first_name') || 'Your team';
+        const size = getValue('agency_size') || 'your current size';
+        const challenge = getValue('challenge') || 'a lack of joined-up AI usage';
+        const setup = getValue('ai_setup') || 'individual experimentation';
+        const opportunity = getValue('biggest_opportunity') || 'creating more joined-up systems';
+        const tools = getValue('tools');
+
+        const toolsLine = tools
+          ? `You're already using ${tools}, which suggests the issue isn't awareness — it's turning those tools into something shared and repeatable.`
+          : `The issue looks less like tool awareness and more like turning experimentation into something shared and repeatable.`;
+
+        return `${firstName}, it looks like your agency (${size}) is already engaging with AI, but the current setup is best described as ${setup.toLowerCase()}. The biggest friction point seems to be ${challenge.toLowerCase()}, while the clearest upside is ${opportunity.toLowerCase()}. ${toolsLine}`;
+      }
+
+      function startSummaryGeneration() {
+        clearTimeout(summaryTimer);
+        summaryContent.hidden = true;
+        summaryLoading.hidden = false;
+        summaryTimer = setTimeout(() => {
+          summaryText.textContent = generateSummary();
+          summaryLoading.hidden = true;
+          summaryContent.hidden = false;
+        }, 900);
+      }
+
+      form.querySelectorAll('[data-next]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const nextStep = Number(button.dataset.next);
+          if (!validateStep(currentStep)) return;
+          if (nextStep === 2) startSummaryGeneration();
+          if (nextStep === 3 && summaryContent.hidden) startSummaryGeneration();
+          showStep(nextStep);
+        });
+      });
+
+      form.querySelectorAll('[data-back]').forEach((button) => {
+        button.addEventListener('click', () => showStep(Number(button.dataset.back)));
+      });
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!validateStep(3)) return;
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.textContent = 'Audit requested';
+        submitButton.disabled = true;
+        form.classList.add('is-submitted');
+      });
     </script>
   </body>
 </html>

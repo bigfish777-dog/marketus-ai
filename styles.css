@@ -59,16 +59,10 @@ nav .container {
 }
 
 .nav-logo {
-  font-family: 'Sora', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  color: var(--white);
-  opacity: 0.95;
-}
-
-.nav-logo span {
-  color: var(--orange);
+  height: 38px;
+  width: auto;
+  display: block;
+  opacity: 0.98;
 }
 
 .nav-link {
@@ -359,6 +353,6 @@ footer .container {
   }
 
   .nav-logo {
-    font-size: 1.05rem;
+    height: 28px;
   }
 }

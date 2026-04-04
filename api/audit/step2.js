@@ -1,4 +1,4 @@
-const { getSupabase, fetchWebsiteContext, generateSummary, json } = require('./_lib/shared');
+const { getSupabase, fetchWebsiteContext, buildWebsiteAudit, generateSummary, json } = require('./_lib/shared');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
@@ -26,20 +26,21 @@ module.exports = async (req, res) => {
     if (updateError) throw updateError;
 
     const websiteContext = await fetchWebsiteContext(audit.website);
-    const generatedSummary = generateSummary(audit, websiteContext);
+    const websiteAudit = buildWebsiteAudit(audit, websiteContext);
+    const generatedSummary = generateSummary(audit, websiteContext, websiteAudit);
 
     const { error: summaryError } = await supabase
       .from('marketus_audits')
       .update({
         generated_summary: generatedSummary,
-        meta: { websiteContext },
+        meta: { websiteContext, websiteAudit },
         status: 'summary_ready'
       })
       .eq('id', body.id);
 
     if (summaryError) throw summaryError;
 
-    return json(res, 200, { id: body.id, generatedSummary });
+    return json(res, 200, { id: body.id, generatedSummary, websiteAudit });
   } catch (error) {
     return json(res, 500, { error: error.message || 'Failed to process step 2' });
   }

@@ -10,7 +10,7 @@ module.exports = async (req, res) => {
 
     const { data, error } = await supabase
       .from('marketus_audits')
-      .select('id, first_name, generated_summary, ai_setup, biggest_opportunity, challenge, website, agency_size, tools')
+      .select('id, first_name, generated_summary, ai_setup, biggest_opportunity, challenge, website, agency_size, tools, meta')
       .eq('id', id)
       .single();
 

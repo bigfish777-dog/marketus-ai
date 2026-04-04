@@ -12,12 +12,43 @@
   <body>
     <nav><div class="container-wide"><a href="../index.html"><img src="icon-mark.png" alt="Marketus.ai" class="nav-logo nav-logo--icon" /></a><div class="nav-right"><a href="../index.html#how" class="nav-link">How it works</a><a href="./" class="nav-cta">Free AI audit</a></div></div></nav>
     <div class="nav-spacer"></div>
-    <section class="book-section audit-page"><div class="container reveal visible"><div class="book-intro audit-intro"><div class="section-label">Get started</div><h2>Get your free AI audit</h2><p>Based on what you’ve shared, here’s our first read. Tweak it if we’ve missed the mark.</p></div>
+    <section class="book-section audit-page"><div class="container reveal visible"><div class="book-intro audit-intro"><div class="section-label">Get started</div><h2>Get your free AI audit</h2><p>Based on what you’ve shared and what we could see on the site, here’s a first-pass read.</p></div>
       <form class="book-form multi-step-form" id="audit-step-3">
         <div class="form-progress"><div class="progress-step is-complete" data-step="1"><span class="progress-index">01</span><span class="progress-text">The basics</span></div><div class="progress-line"></div><div class="progress-step is-complete" data-step="2"><span class="progress-index">02</span><span class="progress-text">More context</span></div><div class="progress-line"></div><div class="progress-step is-active" data-step="3"><span class="progress-index">03</span><span class="progress-text">Sense check</span></div></div>
         <div class="form-panel is-active">
           <div class="form-panel-intro"><h3>Step 3 — Is this a fair summary?</h3><p>Close enough is fine — you can add more context underneath.</p></div>
+
           <div class="summary-card"><div class="summary-content"><p id="summary-text"></p></div></div>
+
+          <div class="audit-report" id="audit-report" hidden>
+            <div class="audit-report-head">
+              <div>
+                <div class="section-label">Homepage review</div>
+                <h3 class="audit-report-title">What we can already see on the site</h3>
+              </div>
+              <div class="audit-score" id="audit-score">--/100</div>
+            </div>
+            <p class="audit-overview" id="audit-overview"></p>
+
+            <div class="audit-snapshot" id="audit-snapshot"></div>
+
+            <div class="audit-columns">
+              <div class="audit-block">
+                <h4>What looks solid</h4>
+                <ul id="audit-strengths"></ul>
+              </div>
+              <div class="audit-block">
+                <h4>What needs tightening</h4>
+                <ul id="audit-gaps"></ul>
+              </div>
+            </div>
+
+            <div class="audit-block audit-block--full">
+              <h4>Best next moves</h4>
+              <ul id="audit-next-steps"></ul>
+            </div>
+          </div>
+
           <div class="form-group"><label class="form-label">Is that about right?</label><div class="radio-group radio-group--inline"><label class="radio-option radio-option--compact"><input type="radio" name="summary_fit" value="Yes, that feels right" required /><span class="radio-custom"></span><span class="radio-label">Yes, that feels right</span></label><label class="radio-option radio-option--compact"><input type="radio" name="summary_fit" value="Not quite" required /><span class="radio-custom"></span><span class="radio-label">Not quite</span></label></div></div>
           <div class="form-group"><label class="form-label" for="summary-notes">Add anything we’ve missed<span class="form-label-sub">Optional — useful if the summary is close, but not quite there.</span></label><textarea id="summary-notes" name="summary_notes" class="form-textarea" placeholder="Anything we should add, sharpen or correct?"></textarea></div>
           <div class="form-actions form-actions--split"><a class="form-secondary form-secondary--link" href="step-2.html">Back</a><button type="submit" class="form-submit form-submit--inline">Request your audit</button></div>
@@ -33,11 +64,51 @@
       if (!auditId) window.location.href = './';
       form.querySelector('.form-secondary--link').href = `step-2.html?id=${encodeURIComponent(auditId)}`;
 
+      function renderList(id, items) {
+        const list = document.getElementById(id);
+        list.innerHTML = '';
+        (items || []).forEach((item) => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      }
+
+      function renderSnapshot(audit) {
+        const root = document.getElementById('audit-snapshot');
+        const snapshot = audit?.snapshot || {};
+        const cards = [
+          ['URL reviewed', audit?.url || 'Not available'],
+          ['Page title', snapshot.title || 'Not detected'],
+          ['Meta description', snapshot.description || 'Not detected'],
+          ['Primary headline', snapshot.h1 || 'Not detected']
+        ];
+
+        root.innerHTML = cards.map(([label, value]) => `
+          <div class="audit-snapshot-card">
+            <span class="audit-snapshot-label">${label}</span>
+            <span class="audit-snapshot-value">${value}</span>
+          </div>
+        `).join('');
+      }
+
+      function renderWebsiteAudit(websiteAudit) {
+        if (!websiteAudit) return;
+        document.getElementById('audit-report').hidden = false;
+        document.getElementById('audit-score').textContent = `${websiteAudit.score || 0}/100`;
+        document.getElementById('audit-overview').textContent = websiteAudit.overview || '';
+        renderSnapshot(websiteAudit);
+        renderList('audit-strengths', websiteAudit.strengths?.length ? websiteAudit.strengths : ['We need a fuller crawl to say much more with confidence.']);
+        renderList('audit-gaps', websiteAudit.gaps?.length ? websiteAudit.gaps : ['No major gaps surfaced from the limited homepage fetch.']);
+        renderList('audit-next-steps', websiteAudit.nextSteps?.length ? websiteAudit.nextSteps : ['Run a deeper review across more than the homepage.']);
+      }
+
       async function loadSummary() {
         const response = await fetch(`/api/audit/get?id=${encodeURIComponent(auditId)}`);
         const result = await response.json();
         if (!response.ok) throw new Error(result.error || 'Failed to load summary');
         summaryText.textContent = result.audit.generated_summary || 'We could not generate a summary yet.';
+        renderWebsiteAudit(result.audit.meta?.websiteAudit);
       }
 
       loadSummary().catch((error) => {

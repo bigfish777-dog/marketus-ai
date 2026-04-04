@@ -731,6 +731,108 @@ section p:last-child {
   color: var(--white-muted);
 }
 
+.audit-report {
+  margin: 0 0 1.75rem;
+  padding: 1.5rem;
+  border: 1px solid var(--navy-border);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.audit-report-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.audit-report-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.audit-score {
+  flex-shrink: 0;
+  min-width: 84px;
+  padding: 0.65rem 0.8rem;
+  border-radius: 999px;
+  text-align: center;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.9rem;
+  color: var(--white);
+  background: var(--orange-dim);
+  border: 1px solid rgba(232, 149, 47, 0.25);
+}
+
+.audit-overview {
+  margin-bottom: 1.25rem;
+  color: var(--white-dim);
+}
+
+.audit-snapshot,
+.audit-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.audit-snapshot {
+  margin-bottom: 1rem;
+}
+
+.audit-snapshot-card,
+.audit-block {
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--navy-border);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.audit-snapshot-label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.75rem;
+  font-family: 'Sora', sans-serif;
+  color: var(--orange);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.audit-snapshot-value {
+  display: block;
+  color: var(--white-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.audit-block h4 {
+  margin-bottom: 0.75rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+}
+
+.audit-block ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.audit-block li {
+  color: var(--white-dim);
+  margin-bottom: 0.65rem;
+  line-height: 1.6;
+}
+
+.audit-block li:last-child {
+  margin-bottom: 0;
+}
+
+.audit-block--full {
+  margin-top: 1rem;
+}
+
 .why-followup {
   margin-top: 1.5rem;
 }
@@ -839,11 +941,16 @@ footer .container {
     display: none;
   }
 
+  .audit-report-head,
+  .audit-snapshot,
+  .audit-columns,
   .form-actions,
   .form-actions--split {
+    grid-template-columns: 1fr;
     flex-direction: column;
   }
 
+  .audit-score,
   .form-submit,
   .form-secondary {
     width: 100%;

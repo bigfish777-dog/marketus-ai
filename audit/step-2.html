@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free AI Audit — Step 2 | Marketus.ai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav><div class="container-wide"><a href="../index.html"><img src="icon-mark.png" alt="Marketus.ai" class="nav-logo nav-logo--icon" /></a><div class="nav-right"><a href="../index.html#how" class="nav-link">How it works</a><a href="./" class="nav-cta">Free AI audit</a></div></div></nav>
+    <div class="nav-spacer"></div>
+    <section class="book-section audit-page"><div class="container reveal visible"><div class="book-intro audit-intro"><div class="section-label">Get started</div><h2>Get your free AI audit</h2><p>A bit more context and we can sharpen the picture.</p></div>
+      <form class="book-form multi-step-form" id="audit-step-2">
+        <div class="form-progress"><div class="progress-step is-complete" data-step="1"><span class="progress-index">01</span><span class="progress-text">The basics</span></div><div class="progress-line"></div><div class="progress-step is-active" data-step="2"><span class="progress-index">02</span><span class="progress-text">More context</span></div><div class="progress-line"></div><div class="progress-step" data-step="3"><span class="progress-index">03</span><span class="progress-text">Sense check</span></div></div>
+        <div class="form-panel is-active"><div class="form-panel-intro"><h3>Step 2 — A bit more context</h3><p>Help us understand how AI is showing up in the business today.</p></div>
+          <div class="form-group"><label class="form-label" for="ai-setup">Which best describes your current AI setup?</label><select id="ai-setup" name="ai_setup" class="form-select" required><option value="" disabled selected>Select</option><option>Mostly individual experimentation</option><option>A few promising workflows, but nothing joined up</option><option>Some embedded systems, but still patchy</option><option>Fairly mature, but we know there’s more to unlock</option></select></div>
+          <div class="form-group"><label class="form-label" for="biggest-opportunity">Where do you think the biggest opportunity is?</label><select id="biggest-opportunity" name="biggest_opportunity" class="form-select" required><option value="" disabled selected>Select</option><option>Internal efficiency</option><option>Delivery speed and quality</option><option>Sales and proposals</option><option>Reporting and operations</option><option>A bit of everything</option></select></div>
+          <div class="form-group"><label class="form-label" for="tools">What AI tools are you already using?</label><input id="tools" name="tools" type="text" class="form-input" placeholder="E.g. ChatGPT, Claude, Gemini, Notion AI, Zapier..." /></div>
+          <div class="form-group"><label class="form-label" for="context">Anything else we should know?<span class="form-label-sub">Optional — useful if there’s context behind the challenge.</span></label><textarea id="context" name="context" class="form-textarea" placeholder="What you've tried, what feels messy, where the frustration is, or what you're hoping AI will unlock..."></textarea></div>
+          <div class="form-actions form-actions--split"><a class="form-secondary form-secondary--link" href="./">Back</a><button type="submit" class="form-submit form-submit--inline">See the summary</button></div>
+        </div>
+      </form></div></section>
+      <script>
+      const form = document.getElementById('audit-step-2');
+      const storageKey = 'marketusAudit';
+      const stored = JSON.parse(sessionStorage.getItem(storageKey) || '{}');
+      if (!stored.first_name) window.location.href = './';
+      Object.entries(stored).forEach(([key, value]) => {
+        const field = form.elements[key];
+        if (field && value) field.value = value;
+      });
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        const merged = { ...stored };
+        for (const [key, value] of data.entries()) merged[key] = value;
+        sessionStorage.setItem(storageKey, JSON.stringify(merged));
+        window.location.href = 'step-3.html';
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free AI Audit — Step 3 | Marketus.ai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav><div class="container-wide"><a href="../index.html"><img src="icon-mark.png" alt="Marketus.ai" class="nav-logo nav-logo--icon" /></a><div class="nav-right"><a href="../index.html#how" class="nav-link">How it works</a><a href="./" class="nav-cta">Free AI audit</a></div></div></nav>
+    <div class="nav-spacer"></div>
+    <section class="book-section audit-page"><div class="container reveal visible"><div class="book-intro audit-intro"><div class="section-label">Get started</div><h2>Get your free AI audit</h2><p>Based on what you’ve shared, here’s our first read. Tweak it if we’ve missed the mark.</p></div>
+      <form class="book-form multi-step-form" id="audit-step-3">
+        <div class="form-progress"><div class="progress-step is-complete" data-step="1"><span class="progress-index">01</span><span class="progress-text">The basics</span></div><div class="progress-line"></div><div class="progress-step is-complete" data-step="2"><span class="progress-index">02</span><span class="progress-text">More context</span></div><div class="progress-line"></div><div class="progress-step is-active" data-step="3"><span class="progress-index">03</span><span class="progress-text">Sense check</span></div></div>
+        <div class="form-panel is-active">
+          <div class="form-panel-intro"><h3>Step 3 — Is this a fair summary?</h3><p>Close enough is fine — you can add more context underneath.</p></div>
+          <div class="summary-card"><div class="summary-content"><p id="summary-text"></p></div></div>
+          <div class="form-group"><label class="form-label">Is that about right?</label><div class="radio-group radio-group--inline"><label class="radio-option radio-option--compact"><input type="radio" name="summary_fit" value="Yes, that feels right" required /><span class="radio-custom"></span><span class="radio-label">Yes, that feels right</span></label><label class="radio-option radio-option--compact"><input type="radio" name="summary_fit" value="Not quite" required /><span class="radio-custom"></span><span class="radio-label">Not quite</span></label></div></div>
+          <div class="form-group"><label class="form-label" for="summary-notes">Add anything we’ve missed<span class="form-label-sub">Optional — useful if the summary is close, but not quite there.</span></label><textarea id="summary-notes" name="summary_notes" class="form-textarea" placeholder="Anything we should add, sharpen or correct?"></textarea></div>
+          <div class="form-actions form-actions--split"><a class="form-secondary form-secondary--link" href="step-2.html">Back</a><button type="submit" class="form-submit form-submit--inline">Request your audit</button></div>
+          <p class="form-note">We’ll be in touch within 24 hours.</p>
+        </div>
+      </form></div></section>
+    <script>
+      const form = document.getElementById('audit-step-3');
+      const storageKey = 'marketusAudit';
+      const stored = JSON.parse(sessionStorage.getItem(storageKey) || '{}');
+      if (!stored.first_name) window.location.href = './';
+      const summaryText = document.getElementById('summary-text');
+      const firstName = stored.first_name || 'Your team';
+      const size = stored.agency_size || 'your current size';
+      const challenge = stored.challenge || 'a lack of joined-up AI usage';
+      const setup = stored.ai_setup || 'individual experimentation';
+      const opportunity = stored.biggest_opportunity || 'creating more joined-up systems';
+      const tools = stored.tools;
+      const toolsLine = tools
+        ? `You're already using ${tools}, which suggests the issue isn't awareness — it's turning those tools into something shared and repeatable.`
+        : `The issue looks less like tool awareness and more like turning experimentation into something shared and repeatable.`;
+      summaryText.textContent = `${firstName}, it looks like your agency (${size}) is already engaging with AI, but the current setup is best described as ${setup.toLowerCase()}. The biggest friction point seems to be ${challenge.toLowerCase()}, while the clearest upside is ${opportunity.toLowerCase()}. ${toolsLine}`;
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        const merged = { ...stored };
+        for (const [key, value] of data.entries()) merged[key] = value;
+        sessionStorage.setItem(storageKey, JSON.stringify(merged));
+        const submitButton = form.querySelector('button[type="submit"]');
+        submitButton.textContent = 'Audit requested';
+        submitButton.disabled = true;
+        form.classList.add('is-submitted');
+      });
+    </script>
+  </body>
+</html>

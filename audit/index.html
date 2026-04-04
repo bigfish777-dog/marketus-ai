@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free AI Audit — Step 1 | Marketus.ai</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="container-wide">
+        <a href="../index.html"><img src="icon-mark.png" alt="Marketus.ai" class="nav-logo nav-logo--icon" /></a>
+        <div class="nav-right">
+          <a href="../index.html#how" class="nav-link">How it works</a>
+          <a href="./" class="nav-cta">Free AI audit</a>
+        </div>
+      </div>
+    </nav>
+    <div class="nav-spacer"></div>
+
+    <section class="book-section audit-page">
+      <div class="container reveal visible">
+        <div class="book-intro audit-intro">
+          <div class="section-label">Get started</div>
+          <h2>Get your free AI audit</h2>
+          <p>Tell us a bit about your agency. We’ll use this to build a clearer picture of where you are now and where the biggest opportunities might be.</p>
+        </div>
+
+        <form class="book-form multi-step-form" id="audit-step-1">
+          <div class="form-progress" aria-label="Audit progress">
+            <div class="progress-step is-active" data-step="1">
+              <span class="progress-index">01</span><span class="progress-text">The basics</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+              <span class="progress-index">02</span><span class="progress-text">More context</span>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+              <span class="progress-index">03</span><span class="progress-text">Sense check</span>
+            </div>
+          </div>
+
+          <div class="form-panel is-active" data-panel="1">
+            <div class="form-panel-intro">
+              <h3>Step 1 — Tell us about your agency</h3>
+              <p>Just enough for a first read. This should take about a minute.</p>
+            </div>
+
+            <div class="form-group"><label class="form-label" for="first-name">First name</label><input id="first-name" name="first_name" type="text" class="form-input" placeholder="First name" required /></div>
+            <div class="form-group"><label class="form-label" for="email">Work email</label><input id="email" name="email" type="email" class="form-input" placeholder="you@agency.com" required /></div>
+            <div class="form-group"><label class="form-label" for="website">Company website</label><input id="website" name="website" type="url" class="form-input" placeholder="https://youragency.com" required /></div>
+            <div class="form-group"><label class="form-label" for="agency-size">Agency headcount</label><select id="agency-size" name="agency_size" class="form-select" required><option value="" disabled selected>Select</option><option>Under 8</option><option>8–15</option><option>16–25</option><option>26–40</option><option>40+</option></select></div>
+
+            <div class="form-group">
+              <label class="form-label">Biggest challenge with AI right now</label>
+              <div class="radio-group">
+                <label class="radio-option"><input type="radio" name="challenge" value="Different people using different tools — nothing's connected" required /><span class="radio-custom"></span><span class="radio-label">Different people using different tools — nothing's connected</span></label>
+                <label class="radio-option"><input type="radio" name="challenge" value="Inconsistent results — some people get value, others don't" /><span class="radio-custom"></span><span class="radio-label">Inconsistent results — some people get value, others don't</span></label>
+                <label class="radio-option"><input type="radio" name="challenge" value="No clear strategy — lots of experimenting, no plan" /><span class="radio-custom"></span><span class="radio-label">No clear strategy — lots of experimenting, no plan</span></label>
+                <label class="radio-option"><input type="radio" name="challenge" value="Feeling like we're falling behind other agencies" /><span class="radio-custom"></span><span class="radio-label">Feeling like we're falling behind other agencies</span></label>
+                <label class="radio-option"><input type="radio" name="challenge" value="Spending on AI tools but not seeing the return" /><span class="radio-custom"></span><span class="radio-label">Spending on AI tools but not seeing the return</span></label>
+                <label class="radio-option"><input type="radio" name="challenge" value="Something else" /><span class="radio-custom"></span><span class="radio-label">Something else</span></label>
+              </div>
+            </div>
+
+            <div class="form-actions"><button type="submit" class="form-submit form-submit--inline">Continue</button></div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script>
+      const form = document.getElementById('audit-step-1');
+      const storageKey = 'marketusAudit';
+      const stored = JSON.parse(sessionStorage.getItem(storageKey) || '{}');
+      Object.entries(stored).forEach(([key, value]) => {
+        const field = form.elements[key];
+        if (!field || !value) return;
+        if (field instanceof RadioNodeList) {
+          Array.from(field).forEach((input) => { if (input.value === value) input.checked = true; });
+        } else {
+          field.value = value;
+        }
+      });
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const data = new FormData(form);
+        const merged = { ...stored };
+        for (const [key, value] of data.entries()) merged[key] = value;
+        sessionStorage.setItem(storageKey, JSON.stringify(merged));
+        window.location.href = 'step-2.html';
+      });
+    </script>
+  </body>
+</html>

@@ -720,18 +720,6 @@ section p:last-child {
   background: var(--green);
 }
 
-.form-secondary--link {
-  text-decoration: none;
-}
-
-.audit-page {
-  min-height: calc(100vh - 72px);
-}
-
-.audit-intro {
-  margin-bottom: 2rem;
-}
-
 .form-note {
   text-align: center;
   margin-top: 1rem;

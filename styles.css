@@ -78,7 +78,7 @@ nav .container-wide {
 }
 
 .nav-logo {
-  height: 16px;
+  height: 13px;
   width: auto;
   display: block;
   opacity: 0.98;
@@ -656,6 +656,6 @@ footer .container {
   }
 
   .nav-logo {
-    height: 13px;
+    height: 11px;
   }
 }

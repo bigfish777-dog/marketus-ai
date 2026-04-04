@@ -25,21 +25,32 @@
       </form></div></section>
       <script>
       const form = document.getElementById('audit-step-2');
-      const storageKey = 'marketusAudit';
-      const stored = JSON.parse(sessionStorage.getItem(storageKey) || '{}');
-      if (!stored.first_name) window.location.href = './';
-      Object.entries(stored).forEach(([key, value]) => {
-        const field = form.elements[key];
-        if (field && value) field.value = value;
-      });
-      form.addEventListener('submit', (event) => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      const params = new URLSearchParams(window.location.search);
+      const auditId = params.get('id');
+      if (!auditId) window.location.href = './';
+      form.querySelector('.form-secondary--link').href = `./?id=${encodeURIComponent(auditId)}`;
+      form.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
-        const data = new FormData(form);
-        const merged = { ...stored };
-        for (const [key, value] of data.entries()) merged[key] = value;
-        sessionStorage.setItem(storageKey, JSON.stringify(merged));
-        window.location.href = 'step-3.html';
+        submitButton.disabled = true;
+        submitButton.textContent = 'Working...';
+        try {
+          const payload = Object.fromEntries(new FormData(form).entries());
+          payload.id = auditId;
+          const response = await fetch('/api/audit/step2', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || 'Failed to process step 2');
+          window.location.href = `step-3.html?id=${encodeURIComponent(auditId)}`;
+        } catch (error) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'See the summary';
+          alert(error.message || 'Something went wrong saving step 2.');
+        }
       });
     </script>
   </body>

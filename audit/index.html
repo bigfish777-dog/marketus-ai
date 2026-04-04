@@ -75,25 +75,27 @@
 
     <script>
       const form = document.getElementById('audit-step-1');
-      const storageKey = 'marketusAudit';
-      const stored = JSON.parse(sessionStorage.getItem(storageKey) || '{}');
-      Object.entries(stored).forEach(([key, value]) => {
-        const field = form.elements[key];
-        if (!field || !value) return;
-        if (field instanceof RadioNodeList) {
-          Array.from(field).forEach((input) => { if (input.value === value) input.checked = true; });
-        } else {
-          field.value = value;
-        }
-      });
-      form.addEventListener('submit', (event) => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      form.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
-        const data = new FormData(form);
-        const merged = { ...stored };
-        for (const [key, value] of data.entries()) merged[key] = value;
-        sessionStorage.setItem(storageKey, JSON.stringify(merged));
-        window.location.href = 'step-2.html';
+        submitButton.disabled = true;
+        submitButton.textContent = 'Working...';
+        try {
+          const payload = Object.fromEntries(new FormData(form).entries());
+          const response = await fetch('/api/audit/start', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || 'Failed to start audit');
+          window.location.href = `step-2.html?id=${encodeURIComponent(result.id)}`;
+        } catch (error) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Continue';
+          alert(error.message || 'Something went wrong starting the audit.');
+        }
       });
     </script>
   </body>

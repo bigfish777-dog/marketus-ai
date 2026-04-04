@@ -26,31 +26,46 @@
       </form></div></section>
     <script>
       const form = document.getElementById('audit-step-3');
-      const storageKey = 'marketusAudit';
-      const stored = JSON.parse(sessionStorage.getItem(storageKey) || '{}');
-      if (!stored.first_name) window.location.href = './';
       const summaryText = document.getElementById('summary-text');
-      const firstName = stored.first_name || 'Your team';
-      const size = stored.agency_size || 'your current size';
-      const challenge = stored.challenge || 'a lack of joined-up AI usage';
-      const setup = stored.ai_setup || 'individual experimentation';
-      const opportunity = stored.biggest_opportunity || 'creating more joined-up systems';
-      const tools = stored.tools;
-      const toolsLine = tools
-        ? `You're already using ${tools}, which suggests the issue isn't awareness — it's turning those tools into something shared and repeatable.`
-        : `The issue looks less like tool awareness and more like turning experimentation into something shared and repeatable.`;
-      summaryText.textContent = `${firstName}, it looks like your agency (${size}) is already engaging with AI, but the current setup is best described as ${setup.toLowerCase()}. The biggest friction point seems to be ${challenge.toLowerCase()}, while the clearest upside is ${opportunity.toLowerCase()}. ${toolsLine}`;
-      form.addEventListener('submit', (event) => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      const params = new URLSearchParams(window.location.search);
+      const auditId = params.get('id');
+      if (!auditId) window.location.href = './';
+      form.querySelector('.form-secondary--link').href = `step-2.html?id=${encodeURIComponent(auditId)}`;
+
+      async function loadSummary() {
+        const response = await fetch(`/api/audit/get?id=${encodeURIComponent(auditId)}`);
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.error || 'Failed to load summary');
+        summaryText.textContent = result.audit.generated_summary || 'We could not generate a summary yet.';
+      }
+
+      loadSummary().catch((error) => {
+        summaryText.textContent = error.message || 'Something went wrong loading the summary.';
+      });
+
+      form.addEventListener('submit', async (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
-        const data = new FormData(form);
-        const merged = { ...stored };
-        for (const [key, value] of data.entries()) merged[key] = value;
-        sessionStorage.setItem(storageKey, JSON.stringify(merged));
-        const submitButton = form.querySelector('button[type="submit"]');
-        submitButton.textContent = 'Audit requested';
         submitButton.disabled = true;
-        form.classList.add('is-submitted');
+        submitButton.textContent = 'Sending...';
+        try {
+          const payload = Object.fromEntries(new FormData(form).entries());
+          payload.id = auditId;
+          const response = await fetch('/api/audit/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.error || 'Failed to submit audit');
+          submitButton.textContent = 'Audit requested';
+          form.classList.add('is-submitted');
+        } catch (error) {
+          submitButton.disabled = false;
+          submitButton.textContent = 'Request your audit';
+          alert(error.message || 'Something went wrong submitting the audit.');
+        }
       });
     </script>
   </body>

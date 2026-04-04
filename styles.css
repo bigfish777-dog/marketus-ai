@@ -84,6 +84,10 @@ nav .container-wide {
   opacity: 0.98;
 }
 
+.nav-logo--icon {
+  height: 22px;
+}
+
 .nav-right {
   display: flex;
   align-items: center;
@@ -657,5 +661,9 @@ footer .container {
 
   .nav-logo {
     height: 11px;
+  }
+
+  .nav-logo--icon {
+    height: 18px;
   }
 }

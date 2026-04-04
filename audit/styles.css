@@ -23,10 +23,13 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 body {
   font-family: 'DM Sans', sans-serif;
+  max-width: 100%;
   background:
     radial-gradient(circle at 85% 10%, rgba(232, 149, 47, 0.08) 0%, transparent 32%),
     linear-gradient(180deg, #172a36 0%, var(--navy-deep) 100%);
@@ -131,6 +134,7 @@ nav .container-wide {
 .hero {
   padding: 9rem 0 6rem;
   position: relative;
+  overflow-x: clip;
 }
 
 .hero::before {

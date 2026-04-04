@@ -176,6 +176,18 @@ nav .container-wide {
   animation: fadeUp 0.7s ease 0.5s forwards;
 }
 
+.hero-subhook {
+  margin-bottom: 1rem;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--white);
+  line-height: 1.6;
+  max-width: 620px;
+  opacity: 0;
+  animation: fadeUp 0.7s ease 0.43s forwards;
+}
+
 .hero-cta {
   display: inline-block;
   margin-top: 2.5rem;

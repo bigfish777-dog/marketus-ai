@@ -254,7 +254,6 @@ function buildWebsiteAudit(audit, websiteContext) {
 
 function generateSummary(audit, websiteContext, websiteAudit) {
   const firstName = audit.first_name || 'Your team';
-  const size = audit.agency_size || 'your current size';
   const challenge = (audit.challenge || 'a lack of joined-up AI usage').toLowerCase();
   const opportunity = (audit.biggest_opportunity || 'creating more joined-up systems').toLowerCase();
   const setup = (audit.ai_setup || '').toLowerCase();
@@ -267,12 +266,6 @@ function generateSummary(audit, websiteContext, websiteAudit) {
   const likelyStage = setup
     ? `${setup}, which suggests there is already some appetite and activity around AI inside the agency`
     : 'still somewhere between curiosity and experimentation, rather than working from a joined-up AI operating model';
-
-  const websiteContextLine = websiteAudit?.reviewed
-    ? findings.includes('service-led-positioning')
-      ? 'From the website, the business looks like it already has a defined offer and is not starting from a blank page.'
-      : 'From the website, the business looks established enough to build on, even if the positioning is not doing all the explanatory work yet.'
-    : '';
 
   const challengeLine = challenge
     ? `The strongest signal is that the pressure point is ${challenge}`
@@ -287,7 +280,7 @@ function generateSummary(audit, websiteContext, websiteAudit) {
     : '';
 
   const websiteInferenceLine = websiteAudit?.reviewed && findings.includes('ai-angle-visible')
-    ? 'That also suggests this is no longer an “if we should use AI” conversation, but a “how do we make it work properly across the agency” one.'
+    ? 'That suggests this is no longer an “if we should use AI” conversation, but a “how do we make it work properly across the agency” one.'
     : websiteAudit?.reviewed
       ? 'That points to a business that probably needs clearer integration and prioritisation more than more experimentation.'
       : '';
@@ -302,7 +295,7 @@ function generateSummary(audit, websiteContext, websiteAudit) {
       ? `Additional nuance: ${summaryNotes}`
       : '';
 
-  return `${firstName}, based on your answers${websiteAudit?.reviewed ? ` and what we could infer from ${websiteContext.url || 'your website'}` : ''}, it looks like your agency (${size}) is ${likelyStage}. ${websiteContextLine} ${challengeLine}, ${opportunityLine} ${toolsLine} ${websiteInferenceLine} ${nuanceLine} ${correctionLine}`
+  return `${firstName}, based on your answers, it looks like the agency is ${likelyStage}. ${challengeLine}, ${opportunityLine} ${toolsLine} ${websiteInferenceLine} ${nuanceLine} ${correctionLine}`
     .replace(/\s+/g, ' ')
     .trim();
 }

@@ -255,15 +255,62 @@ function buildWebsiteAudit(audit, websiteContext) {
 function generateSummary(audit, websiteContext, websiteAudit) {
   const firstName = audit.first_name || 'Your team';
   const size = audit.agency_size || 'your current size';
-  const setup = (audit.ai_setup || 'individual experimentation').toLowerCase();
   const challenge = (audit.challenge || 'a lack of joined-up AI usage').toLowerCase();
   const opportunity = (audit.biggest_opportunity || 'creating more joined-up systems').toLowerCase();
-  const tools = audit.tools ? ` You're already using ${audit.tools}, which suggests the issue isn't awareness — it's turning those tools into something shared and repeatable.` : '';
-  const websiteLine = websiteAudit?.reviewed
-    ? ` We also reviewed the homepage of ${websiteContext.url || 'your site'} and scored it ${websiteAudit.score}/100 as a first-pass marketing read, which gives us a bit more real-world context than the form alone.`
-    : ' We were not able to confidently review the live site, so the website portion of this is lighter than intended.';
+  const setup = (audit.ai_setup || '').toLowerCase();
+  const notes = (audit.context || '').trim();
+  const tools = (audit.tools || '').trim();
+  const summaryFit = (audit.summary_fit || '').trim();
+  const summaryNotes = (audit.summary_notes || '').trim();
+  const findings = classifyWebsite(websiteContext);
 
-  return `${firstName}, it looks like your agency (${size}) is already engaging with AI, but the current setup is best described as ${setup}. The biggest friction point seems to be ${challenge}, while the clearest upside is ${opportunity}. The likely next step is creating a more joined-up operating model so AI becomes shared capability rather than individual habit.${tools}${websiteLine}`;
+  const positioning = findings.includes('service-led-positioning')
+    ? 'position yourselves around a defined service offer rather than just generic AI enthusiasm'
+    : 'may still be a bit broad in how the offer is positioned on-page';
+
+  const aiVisibility = findings.includes('ai-angle-visible')
+    ? 'The AI angle is visible quickly on the site, which helps signal relevance.'
+    : 'The AI angle is not especially prominent on the homepage, so visitors may need to work to understand the pitch.';
+
+  const trustLine = findings.includes('trust-signals-visible')
+    ? 'There are at least some trust cues on-page, which gives the story more weight.'
+    : 'What still looks light is proof — the site could do more to show why someone should believe the promise.';
+
+  const mismatchLine = websiteAudit?.reviewed && challenge
+    ? `From the combination of the site and your answers, the main tension seems to be ${challenge} — not because AI is absent, but because it does not yet feel fully operationalised across the business.`
+    : `The main friction still appears to be ${challenge}.`;
+
+  const opportunityLine = opportunity
+    ? `The clearest upside looks like ${opportunity}, but the bigger strategic win is turning that into a joined-up operating model rather than a few isolated wins.`
+    : 'The clearest upside is creating a more joined-up operating model so AI becomes shared capability rather than individual habit.';
+
+  const setupLine = setup
+    ? `Your current setup reads as ${setup}, which usually means there is enough intent to build on, but not yet enough consistency to compound.`
+    : '';
+
+  const toolsLine = tools
+    ? `Already using ${tools} is a good sign; the issue probably is not awareness of tools, but how those tools connect to process, standards and team-wide adoption.`
+    : '';
+
+  const nuanceLine = notes
+    ? `The extra context you shared suggests this is not just a tooling question but an operating one: ${notes}`
+    : '';
+
+  const correctionLine = summaryFit === 'Not quite' && summaryNotes
+    ? `You also flagged that our first read needed adjustment: ${summaryNotes}`
+    : summaryNotes
+      ? `Additional nuance: ${summaryNotes}`
+      : '';
+
+  if (!websiteAudit?.reviewed) {
+    return `${firstName}, based on what you shared, your agency (${size}) is already engaging with AI, but this still feels more like experimentation than a joined-up system. ${setupLine} ${mismatchLine} ${opportunityLine} ${toolsLine} ${nuanceLine}`
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  return `${firstName}, looking at both your answers and the homepage of ${websiteContext.url || 'your site'}, the business appears to ${positioning}. ${aiVisibility} ${trustLine} For an agency of ${size}, that suggests the opportunity is not simply “use more AI”, but build clearer shared infrastructure around where AI actually improves delivery, decision-making and efficiency. ${mismatchLine} ${opportunityLine} ${setupLine} ${toolsLine} ${nuanceLine} ${correctionLine}`
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 module.exports = {

@@ -31,6 +31,7 @@
       }
 
       * { box-sizing: border-box; margin: 0; padding: 0; }
+      html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
 
       body {
         font-family: 'DM Sans', sans-serif;
@@ -40,6 +41,7 @@
           linear-gradient(180deg, #172a36 0%, var(--navy-deep) 100%);
         color: var(--white);
         line-height: 1.7;
+        overflow-x: hidden;
         -webkit-font-smoothing: antialiased;
       }
 
@@ -93,6 +95,7 @@
       h2 { font-size: clamp(1.7rem, 3vw, 2.45rem); margin-bottom: 0.9rem; }
       h3 { font-size: 1.05rem; margin-bottom: 0.45rem; }
       p { color: var(--white-dim); }
+      h1, h2, h3, h4, p, li, span { overflow-wrap: anywhere; }
 
       .note-panel ul { list-style: none; display: grid; gap: 0.8rem; }
       .note-panel li { color: var(--white-dim); padding-left: 1rem; position: relative; }
@@ -418,13 +421,109 @@
       }
 
       @media (max-width: 700px) {
-        .wrap { padding: 1rem; }
-        .intro-panel, .note-panel, .example { padding: 1.25rem; border-radius: 24px; }
-        .artboard { min-height: 520px; }
-        .chart-shell { left: 64px; right: 18px; }
-        .curve-card--adapt { right: 12px; top: 112px; width: 180px; }
-        .curve-card--leftbehind { left: 12px; bottom: 24px; width: 180px; }
-        .inflection-note { top: 12px; right: 12px; left: auto; max-width: 150px; }
+        h1 { font-size: clamp(1.9rem, 10vw, 2.6rem); }
+        h2 { font-size: clamp(1.4rem, 7vw, 1.9rem); }
+        h3 { font-size: 0.98rem; }
+        .wrap {
+          width: 100%;
+          max-width: 100%;
+          padding: 1rem;
+        }
+        .intro,
+        .examples,
+        .example,
+        .example-head,
+        .desc,
+        .verdicts,
+        .verdict,
+        .compare-panel,
+        .compare-head,
+        .compare-body,
+        .summary-strip,
+        .summary-chip,
+        .curve-card,
+        .tag {
+          width: 100%;
+          max-width: 100%;
+        }
+        .topbar {
+          position: static;
+          padding: 0.95rem 1rem;
+          border-radius: 18px;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+        .topbar img { height: 24px; }
+        .topbar-copy { font-size: 0.9rem; }
+        .intro-panel, .note-panel, .example {
+          padding: 1.25rem;
+          border-radius: 24px;
+          width: 100%;
+          max-width: 100%;
+          overflow: hidden;
+        }
+        .example-head { display: grid; grid-template-columns: 1fr; align-items: start; }
+        .tag { justify-self: start; }
+        .artboard { min-height: auto; }
+
+        .artboard--inflection {
+          padding: 1rem;
+          min-height: 760px;
+        }
+        .axis-label--y {
+          left: 0;
+          top: 1rem;
+          writing-mode: initial;
+          transform: none;
+        }
+        .axis-label--x {
+          left: 0;
+          bottom: 0.75rem;
+        }
+        .chart-shell {
+          left: 0.85rem;
+          right: 0.85rem;
+          top: 4.4rem;
+          bottom: 12rem;
+        }
+        .inflection-band {
+          left: 58%;
+          width: 16%;
+        }
+        .inflection-note {
+          top: 1rem;
+          left: auto;
+          right: 1rem;
+          max-width: 145px;
+          padding: 0.7rem 0.75rem;
+        }
+        .curve-card {
+          width: auto;
+          left: 1rem;
+          right: 1rem;
+          position: absolute;
+        }
+        .curve-card--adapt {
+          top: auto;
+          right: 1rem;
+          bottom: 6.7rem;
+        }
+        .curve-card--leftbehind {
+          left: 1rem;
+          bottom: 1rem;
+        }
+
+        .artboard--efficiency {
+          grid-template-columns: 1fr;
+          padding: 1rem;
+        }
+        .metric-row {
+          grid-template-columns: 1fr;
+          gap: 0.55rem;
+        }
+        .summary-strip {
+          grid-template-columns: 1fr;
+        }
       }
     </style>
   </head>

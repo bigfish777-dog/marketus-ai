@@ -784,7 +784,7 @@ section p:last-child {
 
 .inflection-graphic {
   position: relative;
-  min-height: 520px;
+  min-height: 560px;
   padding: 1.5rem;
   overflow: hidden;
 }
@@ -797,24 +797,30 @@ section p:last-child {
   z-index: 1;
 }
 
-.inflection-chart-label--y {
-  left: 1.05rem;
-  top: 1.45rem;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
-
 .inflection-chart-label--x {
   left: 4.25rem;
   bottom: 1.1rem;
 }
 
+.inflection-inline-note {
+  margin-top: 1.1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--orange);
+  color: var(--white-dim);
+}
+
+.inflection-inline-note span {
+  color: var(--white);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.88rem;
+}
+
 .inflection-chart-shell {
   position: absolute;
   left: 4.25rem;
-  right: 1.4rem;
-  top: 1.35rem;
-  bottom: 7.25rem;
+  right: 1rem;
+  top: 1.6rem;
+  bottom: 11.8rem;
 }
 
 .inflection-chart-shell::before,
@@ -894,24 +900,22 @@ section p:last-child {
   line-height: 1.5;
 }
 
-.inflection-callout--point {
-  max-width: 190px;
-  right: 1.4rem;
-  top: 1.25rem;
-  background: linear-gradient(180deg, rgba(232,149,47,0.18), rgba(255,255,255,0.04));
-  border-color: rgba(232,149,47,0.24);
+.inflection-summary {
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  z-index: 2;
 }
 
-.inflection-callout--adapt {
-  max-width: 220px;
-  right: 1rem;
-  top: 5.8rem;
-}
-
+.inflection-callout--adapt,
 .inflection-callout--delay {
-  max-width: 220px;
-  left: 1.3rem;
-  bottom: 1.25rem;
+  position: relative;
+  inset: auto;
+  max-width: none;
 }
 
 .section-shell--efficiency::before {
@@ -1475,7 +1479,7 @@ footer .container {
   }
 
   .inflection-graphic {
-    min-height: 720px;
+    min-height: 760px;
     padding: 1rem;
   }
 
@@ -1495,7 +1499,7 @@ footer .container {
     left: 1rem;
     right: 1rem;
     top: 4rem;
-    bottom: 12.4rem;
+    bottom: 18.2rem;
   }
 
   .inflection-band {
@@ -1505,8 +1509,6 @@ footer .container {
 
   .inflection-callout {
     max-width: none;
-    left: 1rem;
-    right: 1rem;
   }
 
   .inflection-callout--point {
@@ -1516,13 +1518,11 @@ footer .container {
     max-width: 150px;
   }
 
-  .inflection-callout--adapt {
-    top: auto;
-    bottom: 6.3rem;
-  }
-
-  .inflection-callout--delay {
+  .inflection-summary {
+    left: 1rem;
+    right: 1rem;
     bottom: 1rem;
+    grid-template-columns: 1fr;
   }
 
   .efficiency-panel {

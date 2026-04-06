@@ -18,15 +18,20 @@
         --navy-light: #243d4d;
         --orange: #e8952f;
         --orange-soft: rgba(232, 149, 47, 0.18);
+        --orange-faint: rgba(232, 149, 47, 0.08);
         --white: #f0f2f4;
         --white-dim: #c4d0d8;
         --white-muted: #89a0b0;
         --mist: #dfe6ec;
+        --mist-strong: rgba(223, 230, 236, 0.85);
         --mist-soft: rgba(223, 230, 236, 0.18);
         --card: rgba(255,255,255,0.05);
         --border: rgba(255,255,255,0.09);
+        --shadow: 0 24px 60px rgba(3,10,16,0.22);
       }
+
       * { box-sizing: border-box; margin: 0; padding: 0; }
+
       body {
         font-family: 'DM Sans', sans-serif;
         background:
@@ -37,168 +42,389 @@
         line-height: 1.7;
         -webkit-font-smoothing: antialiased;
       }
+
       .wrap { max-width: 1260px; margin: 0 auto; padding: 2rem; }
+
       .topbar {
-        display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-        margin-bottom: 2rem; padding: 1rem 1.25rem;
-        border: 1px solid rgba(255,255,255,0.06); border-radius: 22px;
-        background: rgba(19,37,49,0.65); backdrop-filter: blur(12px);
-        position: sticky; top: 1rem; z-index: 20;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        padding: 1rem 1.25rem;
+        border: 1px solid rgba(255,255,255,0.06);
+        border-radius: 22px;
+        background: rgba(19,37,49,0.65);
+        backdrop-filter: blur(12px);
+        position: sticky;
+        top: 1rem;
+        z-index: 20;
       }
+
       .topbar img { height: 28px; width: auto; }
       .topbar-copy { color: var(--white-dim); font-size: 0.95rem; }
+
       .intro {
-        display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 2rem;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 2rem;
         margin: 2rem 0 2.5rem;
       }
-      .intro-panel, .note-panel {
-        padding: 2rem; border-radius: 28px; border: 1px solid var(--border);
+
+      .intro-panel,
+      .note-panel {
+        padding: 2rem;
+        border-radius: 28px;
+        border: 1px solid var(--border);
         background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
       }
+
       .eyebrow {
-        font-family: 'Sora', sans-serif; text-transform: uppercase; letter-spacing: 0.18em;
-        color: var(--orange); font-size: 0.74rem; margin-bottom: 1rem;
+        font-family: 'Sora', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+        color: var(--orange);
+        font-size: 0.74rem;
+        margin-bottom: 1rem;
       }
-      h1, h2, h3 { font-family: 'Sora', sans-serif; line-height: 1.08; letter-spacing: -0.03em; }
+
+      h1, h2, h3, h4 { font-family: 'Sora', sans-serif; line-height: 1.08; letter-spacing: -0.03em; }
       h1 { font-size: clamp(2.2rem, 5vw, 4rem); margin-bottom: 1rem; }
-      h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 0.9rem; }
+      h2 { font-size: clamp(1.7rem, 3vw, 2.45rem); margin-bottom: 0.9rem; }
+      h3 { font-size: 1.05rem; margin-bottom: 0.45rem; }
       p { color: var(--white-dim); }
+
       .note-panel ul { list-style: none; display: grid; gap: 0.8rem; }
       .note-panel li { color: var(--white-dim); padding-left: 1rem; position: relative; }
-      .note-panel li::before { content: ''; position: absolute; left: 0; top: 0.7rem; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+      .note-panel li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.7rem;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--orange);
+      }
+
       .examples { display: grid; gap: 2rem; }
+
       .example {
-        padding: 2rem; border-radius: 34px; border: 1px solid rgba(255,255,255,0.07);
+        padding: 2rem;
+        border-radius: 34px;
+        border: 1px solid rgba(255,255,255,0.07);
         background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
-        box-shadow: 0 24px 60px rgba(3,10,16,0.22);
+        box-shadow: var(--shadow);
       }
+
       .example-head {
-        display: flex; justify-content: space-between; gap: 1.5rem; align-items: end; margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        gap: 1.5rem;
+        align-items: end;
+        margin-bottom: 1.5rem;
       }
+
       .tag {
-        display: inline-flex; align-items: center; padding: 0.4rem 0.75rem; border-radius: 999px;
-        background: rgba(232,149,47,0.12); color: var(--white); border: 1px solid rgba(232,149,47,0.18);
-        font-size: 0.8rem; font-family: 'Sora', sans-serif;
+        display: inline-flex;
+        align-items: center;
+        padding: 0.4rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(232,149,47,0.12);
+        color: var(--white);
+        border: 1px solid rgba(232,149,47,0.18);
+        font-size: 0.8rem;
+        font-family: 'Sora', sans-serif;
       }
-      .desc { max-width: 640px; }
+
+      .desc { max-width: 680px; }
+
       .artboard {
-        position: relative; min-height: 430px; overflow: hidden; border-radius: 28px;
+        position: relative;
+        min-height: 460px;
+        overflow: hidden;
+        border-radius: 28px;
         border: 1px solid rgba(255,255,255,0.08);
-        background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.022)), rgba(19,37,49,0.7);
+        background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.022)), rgba(19,37,49,0.72);
       }
-      .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
       .label {
-        font-family: 'Sora', sans-serif; text-transform: uppercase; letter-spacing: 0.16em; font-size: 0.68rem; color: var(--orange);
+        font-family: 'Sora', sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 0.68rem;
+        color: var(--orange);
       }
+
       .muted { color: var(--white-muted); }
 
-      .diagram-node, .glass-card, .ui-card, .bubble {
-        position: absolute; border-radius: 24px; border: 1px solid rgba(255,255,255,0.12);
-      }
-      .diagram-line, .timeline-line, .signal-line {
-        position: absolute; background: linear-gradient(90deg, rgba(223,230,236,0.08), rgba(223,230,236,0.5), rgba(223,230,236,0.08));
-        height: 1px; transform-origin: left center;
-      }
-
-      /* Option 1 */
-      .artboard--diagram::before {
-        content: ''; position: absolute; inset: 24px; border-radius: 24px;
-        background: radial-gradient(circle at 20% 15%, rgba(223,230,236,0.1), transparent 24%), radial-gradient(circle at 78% 18%, rgba(223,230,236,0.12), transparent 20%), linear-gradient(180deg, rgba(223,230,236,0.04), transparent 55%);
-      }
-      .diagram-node {
-        width: 170px; min-height: 112px; padding: 1rem 1rem 0.95rem; background: rgba(223,230,236,0.1); backdrop-filter: blur(10px);
-      }
-      .diagram-node strong { display: block; font-family: 'Sora', sans-serif; font-size: 0.95rem; margin: 0.35rem 0 0.25rem; }
-      .diagram-node span { color: rgba(240,242,244,0.82); font-size: 0.9rem; line-height: 1.45; }
-      .node-a { top: 54px; left: 56px; }
-      .node-b { top: 170px; right: 84px; }
-      .node-c { left: 150px; bottom: 56px; background: linear-gradient(180deg, rgba(232,149,47,0.22), rgba(223,230,236,0.08)); border-color: rgba(232,149,47,0.28); }
-      .line-a { top: 135px; left: 205px; width: 290px; transform: rotate(16deg); }
-      .line-b { top: 255px; left: 260px; width: 220px; transform: rotate(32deg); }
-      .line-c { top: 200px; left: 190px; width: 155px; transform: rotate(94deg); }
-      .diagram-halo {
-        position: absolute; width: 320px; height: 320px; right: -50px; top: -50px; border-radius: 50%; background: radial-gradient(circle, rgba(223,230,236,0.18), transparent 68%);
-      }
-
-      /* Option 2 */
-      .artboard--ui { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 1.25rem; padding: 1.5rem; }
-      .ui-main, .ui-side, .ui-mini {
-        border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; background: rgba(223,230,236,0.08); backdrop-filter: blur(10px);
-      }
-      .ui-main { padding: 1.2rem; position: relative; }
-      .ui-toprow { display: flex; gap: 0.75rem; margin-bottom: 1rem; }
-      .pill { padding: 0.4rem 0.65rem; border-radius: 999px; background: rgba(19,37,49,0.45); color: var(--white); font-size: 0.8rem; }
-      .ui-chart {
-        height: 130px; border-radius: 20px; background: linear-gradient(180deg, rgba(19,37,49,0.45), rgba(19,37,49,0.12));
-        position: relative; overflow: hidden; margin-bottom: 1rem;
-      }
-      .ui-chart::before, .ui-chart::after {
-        content: ''; position: absolute; left: 18px; right: 18px; border-top: 1px solid rgba(223,230,236,0.12);
-      }
-      .ui-chart::before { top: 38px; }
-      .ui-chart::after { top: 78px; }
-      .chart-line {
-        position: absolute; left: 16px; right: 16px; top: 16px; bottom: 16px;
-      }
-      .chart-line svg { width: 100%; height: 100%; }
-      .ui-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
-      .ui-mini { padding: 1rem; min-height: 110px; }
-      .ui-side { padding: 1.15rem; display: grid; gap: 0.9rem; }
-      .ui-side-block {
-        padding: 1rem; border-radius: 18px; background: rgba(19,37,49,0.36); border: 1px solid rgba(255,255,255,0.08);
-      }
-      .timeline { position: relative; min-height: 130px; }
-      .timeline-line { left: 28px; right: 28px; top: 50%; }
-      .dot { position: absolute; top: calc(50% - 8px); width: 16px; height: 16px; border-radius: 50%; background: var(--mist); box-shadow: 0 0 0 8px rgba(223,230,236,0.08); }
-      .dot.one { left: 30px; }
-      .dot.two { left: 50%; transform: translateX(-50%); }
-      .dot.three { right: 30px; }
-
-      /* Option 3 */
-      .artboard--abstract::before {
-        content: ''; position: absolute; inset: 0;
-        background: radial-gradient(circle at 18% 18%, rgba(228,235,240,0.55), transparent 16%), radial-gradient(circle at 76% 24%, rgba(228,235,240,0.4), transparent 18%), radial-gradient(circle at 62% 72%, rgba(228,235,240,0.3), transparent 16%);
-        opacity: 0.6;
-      }
-      .signal-line { height: 2px; background: linear-gradient(90deg, transparent, rgba(228,235,240,0.85), transparent); }
-      .signal-one { top: 98px; left: 40px; width: 330px; transform: rotate(9deg); }
-      .signal-two { top: 144px; right: 70px; width: 260px; transform: rotate(-22deg); }
-      .signal-three { bottom: 120px; left: 180px; width: 310px; transform: rotate(-8deg); }
-      .bubble {
-        background: rgba(228,235,240,0.12); backdrop-filter: blur(14px); border-color: rgba(228,235,240,0.22);
-      }
-      .bubble-a { width: 180px; height: 180px; border-radius: 42px; top: 42px; left: 60px; }
-      .bubble-b { width: 220px; height: 132px; border-radius: 30px; right: 68px; top: 118px; }
-      .bubble-c { width: 260px; height: 150px; border-radius: 34px; left: 170px; bottom: 46px; background: linear-gradient(180deg, rgba(232,149,47,0.2), rgba(228,235,240,0.08)); }
-      .bubble-copy {
-        position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: end; padding: 1rem 1.1rem;
-      }
-      .bubble-copy strong { font-family: 'Sora', sans-serif; font-size: 0.95rem; }
-      .bubble-copy span { font-size: 0.9rem; color: rgba(240,242,244,0.82); }
-
       .verdicts {
-        margin-top: 1.15rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+        margin-top: 1.15rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
       }
+
       .verdict {
-        padding: 1rem 1.1rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+        padding: 1rem 1.1rem;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
       }
-      .verdict strong { display: block; font-family: 'Sora', sans-serif; margin-bottom: 0.35rem; font-size: 0.85rem; }
-      .verdict span { color: var(--white-dim); font-size: 0.92rem; line-height: 1.55; }
+
+      .verdict strong {
+        display: block;
+        font-family: 'Sora', sans-serif;
+        margin-bottom: 0.35rem;
+        font-size: 0.85rem;
+      }
+
+      .verdict span {
+        color: var(--white-dim);
+        font-size: 0.92rem;
+        line-height: 1.55;
+      }
+
+      /* Inflection point */
+      .artboard--inflection::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at 18% 16%, rgba(223,230,236,0.16), transparent 18%),
+          radial-gradient(circle at 83% 22%, rgba(232,149,47,0.12), transparent 22%),
+          linear-gradient(180deg, rgba(255,255,255,0.03), transparent 42%);
+      }
+
+      .axis-label {
+        position: absolute;
+        font-size: 0.78rem;
+        color: var(--white-muted);
+        letter-spacing: 0.04em;
+      }
+
+      .axis-label--y {
+        left: 28px;
+        top: 42px;
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+      }
+
+      .axis-label--x {
+        left: 90px;
+        bottom: 24px;
+      }
+
+      .chart-shell {
+        position: absolute;
+        left: 90px;
+        right: 42px;
+        top: 42px;
+        bottom: 64px;
+      }
+
+      .chart-shell::before,
+      .chart-shell::after {
+        content: '';
+        position: absolute;
+        background: rgba(223,230,236,0.32);
+      }
+
+      .chart-shell::before { left: 0; top: 0; bottom: 0; width: 1px; }
+      .chart-shell::after { left: 0; right: 0; bottom: 0; height: 1px; }
+
+      .grid-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(223,230,236,0.1), rgba(223,230,236,0.2), rgba(223,230,236,0.08));
+      }
+
+      .grid-line.g1 { top: 22%; }
+      .grid-line.g2 { top: 48%; }
+      .grid-line.g3 { top: 74%; }
+
+      .curve-svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .inflection-band {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 57%;
+        width: 14%;
+        background: linear-gradient(180deg, rgba(232,149,47,0.1), rgba(232,149,47,0.06));
+        border-left: 1px solid rgba(232,149,47,0.28);
+        border-right: 1px solid rgba(232,149,47,0.28);
+      }
+
+      .inflection-note {
+        position: absolute;
+        left: calc(57% + 12px);
+        top: 16px;
+        max-width: 170px;
+        padding: 0.75rem 0.85rem;
+        border-radius: 16px;
+        background: rgba(232,149,47,0.16);
+        border: 1px solid rgba(232,149,47,0.24);
+        backdrop-filter: blur(8px);
+      }
+
+      .inflection-note strong {
+        display: block;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.88rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .inflection-note span { font-size: 0.84rem; color: rgba(240,242,244,0.82); line-height: 1.45; }
+
+      .curve-card {
+        position: absolute;
+        width: 210px;
+        padding: 1rem;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(223,230,236,0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .curve-card strong {
+        display: block;
+        font-family: 'Sora', sans-serif;
+        font-size: 1rem;
+        margin: 0.35rem 0 0.25rem;
+      }
+
+      .curve-card span { font-size: 0.9rem; color: rgba(240,242,244,0.82); line-height: 1.45; }
+
+      .curve-card--adapt {
+        right: 18px;
+        top: 66px;
+        background: linear-gradient(180deg, rgba(223,230,236,0.14), rgba(223,230,236,0.06));
+      }
+
+      .curve-card--leftbehind {
+        left: 34px;
+        bottom: 34px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      }
+
+      /* Efficiency */
+      .artboard--efficiency {
+        padding: 1.4rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+      }
+
+      .compare-panel {
+        border-radius: 24px;
+        border: 1px solid rgba(255,255,255,0.1);
+        overflow: hidden;
+        background: rgba(223,230,236,0.08);
+        backdrop-filter: blur(10px);
+      }
+
+      .compare-panel--weak {
+        background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.035));
+      }
+
+      .compare-panel--strong {
+        background: linear-gradient(180deg, rgba(223,230,236,0.14), rgba(223,230,236,0.08));
+        border-color: rgba(232,149,47,0.2);
+      }
+
+      .compare-head {
+        padding: 1.05rem 1.1rem;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        background: rgba(19,37,49,0.32);
+      }
+
+      .compare-head h3 { margin-top: 0.35rem; }
+
+      .compare-body { padding: 1rem 1.1rem 1.15rem; }
+
+      .metric-row {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 0.9rem;
+        align-items: center;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .metric-row:last-child { border-bottom: none; }
+      .metric-name { color: var(--white); font-size: 0.95rem; }
+
+      .bar-wrap {
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(19,37,49,0.35);
+        overflow: hidden;
+        position: relative;
+      }
+
+      .bar {
+        height: 100%;
+        border-radius: 999px;
+      }
+
+      .bar--bad { background: linear-gradient(90deg, rgba(223,230,236,0.45), rgba(223,230,236,0.9)); }
+      .bar--good { background: linear-gradient(90deg, rgba(232,149,47,0.55), rgba(232,149,47,0.98)); }
+
+      .metric-note {
+        margin-top: 0.25rem;
+        font-size: 0.82rem;
+        color: var(--white-muted);
+      }
+
+      .summary-strip {
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.8rem;
+      }
+
+      .summary-chip {
+        padding: 0.9rem 1rem;
+        border-radius: 18px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(19,37,49,0.34);
+      }
+
+      .summary-chip strong {
+        display: block;
+        font-family: 'Sora', sans-serif;
+        font-size: 0.82rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .summary-chip span { font-size: 0.9rem; color: var(--white-dim); }
 
       @media (max-width: 920px) {
-        .intro, .grid-2, .artboard--ui, .verdicts, .example-head { grid-template-columns: 1fr; display: grid; }
+        .intro,
+        .verdicts,
+        .example-head,
+        .artboard--efficiency,
+        .summary-strip { grid-template-columns: 1fr; display: grid; }
+
         .topbar { position: static; }
       }
+
       @media (max-width: 700px) {
         .wrap { padding: 1rem; }
         .intro-panel, .note-panel, .example { padding: 1.25rem; border-radius: 24px; }
-        .artboard { min-height: 380px; }
-        .node-a { left: 20px; }
-        .node-b { right: 20px; }
-        .node-c { left: 52px; }
-        .bubble-a { left: 22px; }
-        .bubble-b { right: 18px; width: 190px; }
-        .bubble-c { left: 58px; width: 220px; }
+        .artboard { min-height: 520px; }
+        .chart-shell { left: 64px; right: 18px; }
+        .curve-card--adapt { right: 12px; top: 112px; width: 180px; }
+        .curve-card--leftbehind { left: 12px; bottom: 24px; width: 180px; }
+        .inflection-note { top: 12px; right: 12px; left: auto; max-width: 150px; }
       }
     </style>
   </head>
@@ -206,24 +432,24 @@
     <div class="wrap">
       <div class="topbar">
         <img src="logo-wordmark.png" alt="Marketus.ai" />
-        <div class="topbar-copy">Graphic exploration — three lighter visual directions for breaking up the page without making it feel cheesy.</div>
+        <div class="topbar-copy">Graphic exploration — commercial visual concepts focused on urgency, opportunity cost and operational efficiency.</div>
       </div>
 
       <section class="intro">
         <div class="intro-panel">
           <div class="eyebrow">Exploration set</div>
-          <h1>Three ways to introduce lighter graphics without turning the page into AI wallpaper.</h1>
+          <h1>Two graphics that do actual sales work, not just visual decoration.</h1>
           <p>
-            These are not final assets — they’re direction pieces. The point is to test how much contrast, structure and visual relief the page wants, while keeping the premium systems-led feel.
+            These are built around the story you just pointed at: the cost of waiting, the compounding upside for agencies that adapt, and the efficiency gains that come from joined-up AI rather than isolated tool usage.
           </p>
         </div>
         <div class="note-panel">
-          <div class="eyebrow">What I’m aiming for</div>
+          <div class="eyebrow">What these are trying to land</div>
           <ul>
-            <li>Lighter visual moments that break up the navy sections</li>
-            <li>Graphics that feel strategic and useful, not decorative fluff</li>
-            <li>A style that still says infrastructure, systems and clarity</li>
-            <li>Something we can integrate into hero, mid-page and transitions</li>
+            <li>There is a real inflection point, not just a trend to “keep an eye on”</li>
+            <li>Delay has an operational cost, not just a missed opportunity</li>
+            <li>Connected AI protects margin and increases delivery capacity</li>
+            <li>The page can create urgency without turning into fearmongering</li>
           </ul>
         </div>
       </section>
@@ -233,36 +459,52 @@
           <div class="example-head">
             <div>
               <div class="eyebrow">Direction 01</div>
-              <h2>Diagrammatic / strategic</h2>
-              <p class="desc">A pale systems map. This feels closest to consulting, planning and connected infrastructure. Best if we want the page to feel more intelligent and less “designed for design’s sake”.</p>
+              <h2>Inflection point / left-behind curve</h2>
+              <p class="desc">
+                A refined competitive curve showing how agencies that build real AI infrastructure begin compounding, while agencies that keep dabbling hit an inflection point where delay starts getting expensive.
+              </p>
             </div>
-            <span class="tag">Best for: hero background or section divider</span>
+            <span class="tag">Best for: “Why now” / “The reality” / pre-solution tension</span>
           </div>
-          <div class="artboard artboard--diagram">
-            <div class="diagram-halo"></div>
-            <div class="diagram-line line-a"></div>
-            <div class="diagram-line line-b"></div>
-            <div class="diagram-line line-c"></div>
-            <div class="diagram-node node-a">
-              <div class="label">Signals</div>
-              <strong>AI tools everywhere</strong>
-              <span>Experimentation happening across the team.</span>
+
+          <div class="artboard artboard--inflection">
+            <div class="axis-label axis-label--y">Operational leverage / competitiveness</div>
+            <div class="axis-label axis-label--x">Time / market shift</div>
+
+            <div class="chart-shell">
+              <div class="grid-line g1"></div>
+              <div class="grid-line g2"></div>
+              <div class="grid-line g3"></div>
+              <div class="inflection-band"></div>
+              <div class="inflection-note">
+                <strong>AI inflection point</strong>
+                <span>Delay stops being neutral and starts eroding speed, margin and competitiveness.</span>
+              </div>
+              <svg class="curve-svg" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M 20 425 C 150 415, 280 405, 430 365 S 730 205, 980 40" fill="none" stroke="#e8952f" stroke-width="6" stroke-linecap="round" />
+                <path d="M 20 420 C 210 418, 360 430, 560 452 S 780 470, 980 505" fill="none" stroke="rgba(223,230,236,0.88)" stroke-width="5" stroke-linecap="round" />
+                <circle cx="660" cy="248" r="8" fill="#e8952f"></circle>
+                <circle cx="670" cy="460" r="8" fill="#dfe6ec"></circle>
+              </svg>
             </div>
-            <div class="diagram-node node-b">
-              <div class="label">Problem</div>
-              <strong>No shared context</strong>
-              <span>Useful intelligence stays trapped in local workflows.</span>
+
+            <div class="curve-card curve-card--adapt">
+              <div class="label">Agencies that adapt</div>
+              <strong>Compounding starts here</strong>
+              <span>Better decisions, more reusable intelligence, stronger margins and faster execution.</span>
             </div>
-            <div class="diagram-node node-c">
-              <div class="label">Outcome</div>
-              <strong>Connected infrastructure</strong>
-              <span>Sales, delivery and ops start compounding together.</span>
+
+            <div class="curve-card curve-card--leftbehind">
+              <div class="label">Agencies that delay</div>
+              <strong>Opportunity cost turns structural</strong>
+              <span>More duplicated effort, slower delivery, weaker visibility and rising competitive drag.</span>
             </div>
           </div>
+
           <div class="verdicts">
-            <div class="verdict"><strong>Why it works</strong><span>Lightest-touch way to add contrast while keeping the premium tone.</span></div>
-            <div class="verdict"><strong>Where to use it</strong><span>Behind the hero cards, between sections, or as an anchored side visual.</span></div>
-            <div class="verdict"><strong>Risk</strong><span>If overdone, it can feel a bit consultancy-generic. Needs restraint.</span></div>
+            <div class="verdict"><strong>Why it works</strong><span>It turns the proposition into a strategic urgency story instead of just an operational tidy-up.</span></div>
+            <div class="verdict"><strong>Where to use it</strong><span>High on the page, before the solution, where we want to sharpen “why this matters now”.</span></div>
+            <div class="verdict"><strong>Risk</strong><span>If it gets too dramatic, it can feel alarmist — so the tone needs to stay measured and premium.</span></div>
           </div>
         </article>
 
@@ -270,103 +512,111 @@
           <div class="example-head">
             <div>
               <div class="eyebrow">Direction 02</div>
-              <h2>UI / productised</h2>
-              <p class="desc">A lighter, more tangible interface-style direction. This makes the proposition feel operational and real — as if there’s an actual system, dashboard or roadmap sitting underneath the consultancy.</p>
+              <h2>Efficiency / margin comparison</h2>
+              <p class="desc">
+                A side-by-side operating picture showing the drag of disconnected AI usage versus the efficiency gains of connected infrastructure. This is the more commercially grounded proof point.
+              </p>
             </div>
-            <span class="tag">Best for: “What we do” or “How it works”</span>
+            <span class="tag">Best for: “What we do” / “Outcomes” / ROI framing</span>
           </div>
-          <div class="artboard artboard--ui">
-            <div class="ui-main">
-              <div class="ui-toprow">
-                <span class="pill">Ops</span>
-                <span class="pill">Delivery</span>
-                <span class="pill">Sales</span>
-              </div>
-              <div class="ui-chart">
-                <div class="chart-line">
-                  <svg viewBox="0 0 100 40" preserveAspectRatio="none">
-                    <polyline fill="none" stroke="#dfe6ec" stroke-width="1.6" points="0,30 18,27 36,29 54,18 70,22 84,11 100,6" opacity="0.9"></polyline>
-                    <polyline fill="none" stroke="#e8952f" stroke-width="1.8" points="0,34 16,33 34,26 52,24 69,16 84,14 100,8"></polyline>
-                  </svg>
-                </div>
-              </div>
-              <div class="ui-cards">
-                <div class="ui-mini">
-                  <div class="label">Priority</div>
-                  <h3>Shared context layer</h3>
-                  <p class="muted">Connect meetings, docs and workflows first.</p>
-                </div>
-                <div class="ui-mini">
-                  <div class="label">Next move</div>
-                  <h3>Team workshop</h3>
-                  <p class="muted">Map real usage before buying more tools.</p>
-                </div>
-              </div>
-            </div>
-            <div class="ui-side">
-              <div class="ui-side-block">
-                <div class="label">Roadmap view</div>
-                <div class="timeline">
-                  <div class="timeline-line"></div>
-                  <div class="dot one"></div>
-                  <div class="dot two"></div>
-                  <div class="dot three"></div>
-                </div>
-                <p class="muted">Audit → workshop → infrastructure rollout</p>
-              </div>
-              <div class="ui-side-block">
-                <div class="label">Observed pattern</div>
-                <h3>Strongest when the work looks real.</h3>
-                <p class="muted">This direction adds a practical, productised feel without needing literal screenshots.</p>
-              </div>
-            </div>
-          </div>
-          <div class="verdicts">
-            <div class="verdict"><strong>Why it works</strong><span>Feels useful. Gives shape to the promise rather than just decorating it.</span></div>
-            <div class="verdict"><strong>Where to use it</strong><span>Mid-page as a contrast block, especially around roadmap / audit / outcomes.</span></div>
-            <div class="verdict"><strong>Risk</strong><span>If too polished, it can imply a software product instead of a consultancy.</span></div>
-          </div>
-        </article>
 
-        <article class="example">
-          <div class="example-head">
-            <div>
-              <div class="eyebrow">Direction 03</div>
-              <h2>Abstract / premium</h2>
-              <p class="desc">More atmospheric. Pale signal lines, soft glass forms and a bit more visual theatre. This is the most brand-led option — less literal, more elegant.</p>
+          <div class="artboard artboard--efficiency">
+            <div class="compare-panel compare-panel--weak">
+              <div class="compare-head">
+                <div class="label">Without joined-up AI</div>
+                <h3>Scattered tools, hidden cost</h3>
+                <p class="muted">Experimentation is happening, but the business doesn’t really get the benefit.</p>
+              </div>
+              <div class="compare-body">
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Admin drag</div>
+                    <div class="metric-note">Manual handoffs and repeated coordination</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--bad" style="width: 86%"></div></div>
+                </div>
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Repeated work</div>
+                    <div class="metric-note">Knowledge trapped in individual workflows</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--bad" style="width: 78%"></div></div>
+                </div>
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Team visibility</div>
+                    <div class="metric-note">Low shared context across sales, ops and delivery</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--bad" style="width: 34%"></div></div>
+                </div>
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Margin protection</div>
+                    <div class="metric-note">Operational leakage sits in the background</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--bad" style="width: 40%"></div></div>
+                </div>
+              </div>
             </div>
-            <span class="tag">Best for: transitions or premium accent moments</span>
+
+            <div class="compare-panel compare-panel--strong">
+              <div class="compare-head">
+                <div class="label">With connected AI infrastructure</div>
+                <h3>Lower drag, more leverage</h3>
+                <p class="muted">The same team starts moving faster because context, decisions and execution compound.</p>
+              </div>
+              <div class="compare-body">
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Admin drag</div>
+                    <div class="metric-note">Automated handoffs and cleaner process flow</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--good" style="width: 28%"></div></div>
+                </div>
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Reusable intelligence</div>
+                    <div class="metric-note">Work compounds instead of being recreated</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--good" style="width: 84%"></div></div>
+                </div>
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Team visibility</div>
+                    <div class="metric-note">Shared context improves decisions and handoffs</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--good" style="width: 82%"></div></div>
+                </div>
+                <div class="metric-row">
+                  <div>
+                    <div class="metric-name">Margin protection</div>
+                    <div class="metric-note">Less waste, stronger output per head</div>
+                  </div>
+                  <div class="bar-wrap"><div class="bar bar--good" style="width: 76%"></div></div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="artboard artboard--abstract">
-            <div class="signal-line signal-one"></div>
-            <div class="signal-line signal-two"></div>
-            <div class="signal-line signal-three"></div>
-            <div class="bubble bubble-a">
-              <div class="bubble-copy">
-                <div class="label">Signal</div>
-                <strong>More contrast</strong>
-                <span>Without adding clutter.</span>
-              </div>
+
+          <div class="summary-strip">
+            <div class="summary-chip">
+              <strong>Commercial point</strong>
+              <span>AI isn’t just a productivity story — it’s a margin and competitiveness story.</span>
             </div>
-            <div class="bubble bubble-b">
-              <div class="bubble-copy">
-                <div class="label">Tone</div>
-                <strong>Premium systems feel</strong>
-                <span>Clean. Calm. A bit more editorial.</span>
-              </div>
+            <div class="summary-chip">
+              <strong>Best use</strong>
+              <span>Later on the page, once the urgency has been set and we need practical proof.</span>
             </div>
-            <div class="bubble bubble-c">
-              <div class="bubble-copy">
-                <div class="label">Use case</div>
-                <strong>Section relief</strong>
-                <span>Break up long runs of copy with lighter visual atmosphere.</span>
-              </div>
+            <div class="summary-chip">
+              <strong>Important caveat</strong>
+              <span>Keep it directional unless we want to support it with real client or internal data.</span>
             </div>
           </div>
+
           <div class="verdicts">
-            <div class="verdict"><strong>Why it works</strong><span>It’s the prettiest option. Adds visual relief and gives the brand more personality.</span></div>
-            <div class="verdict"><strong>Where to use it</strong><span>As a supporting accent, not the main explanatory graphic.</span></div>
-            <div class="verdict"><strong>Risk</strong><span>Easiest one to drift into style-over-substance if it starts taking over.</span></div>
+            <div class="verdict"><strong>Why it works</strong><span>It gives the buyer a cleaner mental model of where the gains actually come from.</span></div>
+            <div class="verdict"><strong>Where to use it</strong><span>Mid-page or near the offer, where we want to make the business case feel concrete.</span></div>
+            <div class="verdict"><strong>Risk</strong><span>If the numbers look too literal, it can invite scrutiny we don’t need. Better to keep it illustrative for now.</span></div>
           </div>
         </article>
       </section>

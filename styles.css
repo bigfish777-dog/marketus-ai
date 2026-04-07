@@ -784,7 +784,7 @@ section p:last-child {
 
 .inflection-graphic {
   position: relative;
-  min-height: 560px;
+  min-height: 620px;
   padding: 1.5rem;
   overflow: hidden;
 }
@@ -820,7 +820,7 @@ section p:last-child {
   left: 4.25rem;
   right: 1rem;
   top: 1.6rem;
-  bottom: 11.8rem;
+  bottom: 13.5rem;
 }
 
 .inflection-chart-shell::before,
@@ -876,7 +876,7 @@ section p:last-child {
 
 .inflection-callout {
   position: absolute;
-  padding: 0.95rem 1rem;
+  padding: 1.1rem 1.15rem;
   border-radius: 18px;
   border: 1px solid var(--border-soft);
   background: linear-gradient(180deg, rgba(255,255,255,0.07), rgba(255,255,255,0.04));
@@ -907,7 +907,7 @@ section p:last-child {
   bottom: 0.9rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 1rem;
   z-index: 2;
 }
 

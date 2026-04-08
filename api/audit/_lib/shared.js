@@ -89,7 +89,7 @@ function scoreAudit({ websiteContext, audit }) {
   if (headings.length >= 3) {
     score += 10;
   } else {
-    notes.push('Page structure looks thin — not many useful headings to guide the reader.');
+    notes.push('Page structure looks thin - not many useful headings to guide the reader.');
   }
 
   if (ctas.length >= 1) {
@@ -209,7 +209,7 @@ function buildWebsiteAudit(audit, websiteContext) {
   const gaps = [];
   const nextSteps = [];
 
-  if (websiteContext.h1) strengths.push(`The homepage does have a primary headline: “${websiteContext.h1}”.`);
+  if (websiteContext.h1) strengths.push(`The homepage does have a primary headline: "${websiteContext.h1}".`);
   if (websiteContext.description) strengths.push('There is at least some defined search/social description to work from.');
   if ((websiteContext.ctas || []).length) strengths.push(`Clear calls to action were detected (${websiteContext.ctas.slice(0, 3).join(', ')}).`);
   if (findings.includes('service-led-positioning')) strengths.push('The homepage appears to communicate a service-led offer rather than being completely vague.');
@@ -280,7 +280,7 @@ function generateSummary(audit, websiteContext, websiteAudit) {
     : '';
 
   const websiteInferenceLine = websiteAudit?.reviewed && findings.includes('ai-angle-visible')
-    ? 'That suggests this is no longer an “if we should use AI” conversation, but a “how do we make it work properly across the agency” one.'
+    ? 'That suggests this is no longer an "if we should use AI" conversation, but a "how do we make it work properly across the agency" one.'
     : websiteAudit?.reviewed
       ? 'That points to a business that probably needs clearer integration and prioritisation more than more experimentation.'
       : '';

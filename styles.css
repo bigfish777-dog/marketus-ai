@@ -802,6 +802,14 @@ section p:last-child {
   bottom: 1.1rem;
 }
 
+.inflection-chart-label--y {
+  left: 0.5rem;
+  top: 50%;
+  transform: rotate(-90deg) translateX(-50%);
+  transform-origin: left center;
+  white-space: nowrap;
+}
+
 .inflection-inline-note {
   margin-top: 1.1rem;
   padding-left: 1rem;
